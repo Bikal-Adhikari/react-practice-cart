@@ -1,6 +1,13 @@
 import { useContext, useReducer, useEffect, createContext } from "react";
 
+import cartItems from "./data";
+
 const AppContext = createContext();
+
+const initialState = {
+  loading: false,
+  cart: new Map(),
+};
 
 export const AppProvider = ({ children }) => {
   const remove = (id) => {
