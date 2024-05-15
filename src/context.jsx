@@ -9,6 +9,7 @@ import {
   LOADING,
   DISPLAY_ITEMS,
 } from "./actions";
+import { getTotals } from "./utils";
 
 const url = "https://www.course-api.com/react-useReducer-cart-project";
 
@@ -21,6 +22,7 @@ const initialState = {
 
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { totalAmount, totalCost } = getTotals(state.cart);
 
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
@@ -46,7 +48,15 @@ export const AppProvider = ({ children }) => {
   }, []);
   return (
     <AppContext.Provider
-      value={{ remove, increase, decrease, totalCost, clearCart }}
+      value={{
+        ...state,
+        remove,
+        increase,
+        decrease,
+        totalCost,
+        clearCart,
+        totalAmount,
+      }}
     >
       {children}
     </AppContext.Provider>
