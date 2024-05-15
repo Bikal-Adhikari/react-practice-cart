@@ -3,9 +3,19 @@ import { useContext, useReducer, useEffect, createContext } from "react";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const greeting = "Hello";
+  const remove = (id) => {
+    dispatch({ type: REMOVE, payload: { id } });
+  };
+  const increase = (id) => {
+    dispatch({ type: INCREASE, payload: { id } });
+  };
+  const decrease = (id) => {
+    dispatch({ type: DECREASE, payload: { id } });
+  };
   return (
-    <AppContext.Provider value={{ greeting }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ remove, increase, decrease }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 
